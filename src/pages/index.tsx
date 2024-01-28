@@ -9,7 +9,7 @@ export default function Home({ data }: any) {
       <Header>Temperatura para <strong>São paulo</strong> nos proximos <strong>7 dias</strong></Header>
       <DivHome>
 
-        {data?.data.map((dado: any)=>{
+        {data?.data?.map((dado: any)=>{
           console.log(dado)
 
           return <Slider 

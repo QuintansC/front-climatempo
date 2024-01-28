@@ -15,7 +15,7 @@ interface CardInformacoesProps{
         pt: string
     }
     sol:{
-        surise: string
+        sunrise: string
         sunset: String
     }
     chuva: {
@@ -58,7 +58,7 @@ const CardInformacoes = (props: CardInformacoesProps) => {
                 </ItemDeInformacao>
                 <ItemDeInformacao>
                     <strong>Sol: </strong>
-                    <CaixaTemp color={'255,100,0, 0.3'}>{`${props.sol.surise} - ${props.sol.sunset}`}</CaixaTemp>
+                    <CaixaTemp color={'255,100,0, 0.3'}>{`${props.sol.sunrise} - ${props.sol.sunset}`}</CaixaTemp>
                 </ItemDeInformacao>
                 <ItemDeInformacao>
                     <strong>Chuva: </strong>
