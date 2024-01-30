@@ -1,7 +1,7 @@
 'use client'
 import Slider from "@/components/CardInformacoes";
 import { DivHome, Footer, Header, Main } from "@/styles/pageStyle";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 
 export default function Home({ data }: any) {
   return (
@@ -27,9 +27,9 @@ export default function Home({ data }: any) {
   );
 }
 
-export const getServerSideProps = (async () => {
+export const getStaticProps = (async () => {
   const res = await await fetch(`http://apiadvisor.climatempo.com.br/api/v1/forecast/locale/6754/days/15?token=${process.env.TOKEN}`)
   const data = await res.json()
   return { props: { data } }
-}) satisfies GetServerSideProps
+}) satisfies GetStaticProps
 
