@@ -1,27 +1,55 @@
 'use client'
 import Slider from "@/components/CardInformacoes";
-import { DivHome, Footer, Header, Main } from "@/styles/pageStyle";
+import { DivHome, Footer, Header, Main, BotaoFlechaEsquerda, BotaoFlechaDireita } from "@/styles/pageStyle";
 import { GetStaticProps } from "next";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
-export default function Home({ data }: any) {
+export default function Home({ data }: HomePropsData) {
+  const carousel = useRef<any>(null)
+  const [temperaturaTotalMaxima, setTemperaturaTotalMaxima] = useState(0)
+  const [temperaturaTotalMinima, setTemperaturaTotalMinima] = useState(0)
+
+  useEffect(()=>{
+    {data?.data?.map((dado: Dado)=>{
+      setTemperaturaTotalMaxima(temperaturaTotalMaxima+parseInt(dado.temperature.max));
+      setTemperaturaTotalMinima(temperaturaTotalMinima+parseInt(dado.temperature.min));
+    })}
+  }, [])
+
+  const avancarCarousel = (e: React.MouseEvent<HTMLElement>) =>{
+    e.preventDefault()
+    let valor = carousel.current.offsetWidth / 3
+    carousel.current.scrollLeft += valor
+  }
+
+  const retrocederCarousel = (e: any) =>{
+    e.preventDefault()
+    let valor = carousel.current.offsetWidth / 3
+    carousel.current.scrollLeft -= valor
+  }
+
   return (
     <Main>
-      <Header>Temperatura para <strong>São paulo</strong> nos proximos <strong>7 dias</strong></Header>
-      <DivHome>
-
-        {data?.data?.map((dado: any)=>{
-          console.log(dado)
-
+      <Header>Temperatura para <strong>{data.name} - {data.state}</strong> nos proximos <strong>{data.data.length} dias</strong></Header>
+      <DivHome ref={carousel}>
+        {data?.data?.map((dado: Dado, id: number) => {
           return <Slider 
+            key={id}
             data={dado.date_br}
             temperatura={dado.temperature}
             humidade={dado.humidity}
             text={dado.text_icon.text}
             sol={dado.sun}
             chuva={dado.rain}
-          ></Slider>
+            valorMediaMax={temperaturaTotalMaxima}
+            valorMediaMin={temperaturaTotalMinima}
+          >
+          </Slider>
         })}
-      </DivHome>
+      </DivHome>;
+      <BotaoFlechaDireita onClick={avancarCarousel}><Image alt="arrow" src={'/arrow.webp'} width={30} height={30}/></BotaoFlechaDireita>
+      <BotaoFlechaEsquerda onClick={retrocederCarousel}><Image alt="arrow" src={'/arrow.webp'} width={30} height={30}/></BotaoFlechaEsquerda>
       <Footer></Footer>
     </Main>
   );
