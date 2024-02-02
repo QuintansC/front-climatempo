@@ -2,10 +2,11 @@
 import Slider from "@/components/CardInformacoes";
 import { DivHome, Footer, Header, Main, BotaoFlechaEsquerda, BotaoFlechaDireita } from "@/styles/pageStyle";
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-export default function Home({ data }: HomePropsData) {
+export default function Home({ data, errorExcecao }: HomePropsData) {
   const carousel = useRef<any>(null)
   const [temperaturaTotalMaxima, setTemperaturaTotalMaxima] = useState(0)
   const [temperaturaTotalMinima, setTemperaturaTotalMinima] = useState(0)
@@ -28,12 +29,22 @@ export default function Home({ data }: HomePropsData) {
     let valor = carousel.current.offsetWidth / 3
     carousel.current.scrollLeft -= valor
   }
-
   return (
     <Main>
-      <Header>Temperatura para <strong>{data.name} - {data.state}</strong> nos proximos <strong>{data.data.length} dias</strong></Header>
+      <Head>
+        <title>Teste Culttivo</title>
+        <meta
+          name="description"
+          content="Teste desenvolvido para Vaga de Front-end da Culttivo"
+        />
+
+      </Head>
+      {data != undefined?
+        <Header>Temperatura para <strong>{data.name} - {data.state}</strong> nos proximos <strong>{data.data.length} dias</strong></Header>:
+        <Header>Erro na API ao buscar os Dados, por favor entre em contato</Header>
+      }
       <DivHome ref={carousel}>
-        {data?.data?.map((dado: Dado, id: number) => {
+        {data !== undefined?data?.data?.map((dado: Dado, id: number) => {
           return <Slider 
             key={id}
             data={dado.date_br}
@@ -46,7 +57,9 @@ export default function Home({ data }: HomePropsData) {
             valorMediaMin={temperaturaTotalMinima}
           >
           </Slider>
-        })}
+        }):
+          <div>Houve um erro ao Encontrar os dados: {errorExcecao.message}</div>
+        }
       </DivHome>;
       <BotaoFlechaDireita onClick={avancarCarousel}><Image alt="arrow" src={'/arrow.webp'} width={30} height={30}/></BotaoFlechaDireita>
       <BotaoFlechaEsquerda onClick={retrocederCarousel}><Image alt="arrow" src={'/arrow.webp'} width={30} height={30}/></BotaoFlechaEsquerda>
@@ -56,8 +69,15 @@ export default function Home({ data }: HomePropsData) {
 }
 
 export const getStaticProps = (async () => {
-  const res = await await fetch(`http://apiadvisor.climatempo.com.br/api/v1/forecast/locale/6754/days/15?token=${process.env.TOKEN}`)
-  const data = await res.json()
-  return { props: { data } }
+  try{
+    const res = await fetch(`http://apiadvisor.climatempo.com.br/api/v1/forecast/locale/6754/days/15?token=${process.env.TOKEN}`)
+    const data = await res.json()
+    return { props: { data } }
+  }
+  catch(errorExcecao){
+    return {
+      props: { errorExcecao }
+    }
+  }
 }) satisfies GetStaticProps
 

@@ -1,5 +1,6 @@
 type HomePropsData={
   data: Dado
+  errorExcecao: Error
 }
   
 interface Dado {

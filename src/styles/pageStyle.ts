@@ -33,6 +33,7 @@ const DivHome = styled.div`
   justify-content: space-between;
   width: 1040px;
   overflow-x: auto;
+  overflow: hidden;
   scroll-behavior: smooth;
   padding: 20px;
 `
