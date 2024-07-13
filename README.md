@@ -1,8 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Esse é um projeto utilizado para consumir API clima tempo, utilizar uma biblioteca e criar sua hospedagem do 0 na AWS, projeto utilizado para aprendizagem do ambiente AWS voltado para o fullstack
 
-## Getting Started
+## Getting Started/Começando
 
-First, run the development server:
+### Como rodar o projeto localmente
 
 ```bash
 npm run dev
@@ -14,27 +14,20 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra na Url: [http://localhost:3000](http://localhost:3000) para ver o projeto em seu navegador web.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Você pode começar editando a pagina `pages/index.tsx`.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Para aprender mais sobre o Next.js, aqui estão alguns sites que podem ser úteis no seu aprendizado:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Next.js Documentation](https://nextjs.org/docs) - Aprenda sobre Next.js funcionalidades e API.
+- [Learn Next.js](https://nextjs.org/learn) - Um tutorial interativo sobre Next.js.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Você pode acessar o deploy da aplicação nesse [Link](http://localhost:3000).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Para mais [Detalhes]([http://ec2-18-228-173-144.sa-east-1.compute.amazonaws.com]), contribuição, ou uma conversa que seja, abre uma issue vou adorar responder e compartilhar meu conhecimento por aqui!
+
